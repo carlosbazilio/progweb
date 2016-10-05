@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+		function validateForm() {
+		    var x = document.forms["myForm"]["firstname"].value;
+		    if (x == null || x == "") {
+		        alert("Name must be filled out");
+		        return false;
+		    }
+		}
+		</script>
+	</head>
+<body>
+	<form name="myForm" action="action_page.php" 
+	onsubmit="return validateForm()">
+	  First name:<br>
+	  <input type="text" name="firstname" value="Mickey">
+	  <br>
+	  Last name:<br>
+	  <input type="text" name="lastname" value="Mouse">
+	  <br><br>
+	  <input type="submit" value="Submit">
+	</form> 
+
+	<p>If you click the "Submit" button, the form-data will be sent to a page called "action_page.php".</p>
+
+</body>
+</html> 
