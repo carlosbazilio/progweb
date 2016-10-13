@@ -1,13 +1,17 @@
 <?php
+	/*
+	Extraído de http://stackoverflow.com/questions/520237/how-do-i-expire-a-php-session-after-30-minutes
 
-	/*session_cache_expire(1);
+	http://php.net/manual/en/function.session-cache-expire.php#81265
+
+	session_cache_expire(1);
 	session_start();
 
 	if (empty($_SESSION['count'])) {
 	   $_SESSION['count'] = 1;
 	} else {
 	   $_SESSION['count']++;
-	}*/
+	}*/	
 	
 	session_start();
 
