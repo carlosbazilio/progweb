@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../js/ajax.js"></script>
+<script type="text/javascript">
+  function loadTime() {
+    var today = new Date();
+    document.getElementById('time').innerHTML=today;
+  }
+</script>
+</head>
+<body>
+
+  <div id="texto"><h2>!!! Texto a ser mudado !!!</h2></div>
+  <button type="button" onclick="loadXMLDocAsync('ajax_info.txt', 'texto')">Mudar conteudo</button>
+  <div id="time"></div>
+  <button type="button" onclick="loadTime()">Inserir tempo</button>
+  
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <!-- Configuração do JNDI do Postgres no Tomcat -->
+
+    <Resource name="jdbc/Postgres"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="postgres"
+            password="postgresadmin"
+            driverClassName="org.postgresql.Driver"
+            url="jdbc:postgresql://localhost:5432/postgres"
+            maxActive="8"
+            maxIdle="4"/>
+</Context>
