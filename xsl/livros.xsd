@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="livros">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="livro" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="proprietario" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Bazilio"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="data-criacao" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="06/07"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="livro">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="titulo" type="xs:string"/>
+				<xs:element name="autor" type="xs:string"/>
+				<xs:element name="editora" type="xs:string" minOccurs="0"/>
+				<xs:element name="assunto" type="xs:string" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

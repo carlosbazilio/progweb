@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<html xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" se:origin="#document">
+  <head se:origin="#document">
+    <title se:origin="#document">Meus livros</title>
+  </head>
+  <body se:origin="#document">
+    <table border="2" se:origin="#document">
+      <tr se:origin="#document">
+        <th se:origin="#document">Título</th>
+        <th se:origin="#document">Autor</th>
+      </tr>
+      <tr se:origin="livro">
+        <td se:origin="livro">JavaServer Pages</td>
+        <td se:origin="livro">Nick Todd</td>
+      </tr>
+      <tr se:origin="livro">
+        <td se:origin="livro">Redes de Computadores</td>
+        <td se:origin="livro">Kurose</td>
+      </tr>
+    </table>
+  </body>
+</html>

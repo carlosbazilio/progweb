@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="livros2html.xslt"?>
+<livros proprietario="Bazilio" data-criacao="06/07" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="livros.xsd">
+	<livro>
+		<titulo>JavaServer Pages</titulo>
+		<autor>Nick Todd</autor>
+		<editora>Campus</editora>
+		<assunto>JSP</assunto>
+	</livro>
+	<livro>
+		<titulo>Redes de Computadores</titulo>
+		<editora>Campus</editora>
+		<autor>Kurose</autor>
+	</livro>
+	<livro>
+		<titulo>Meu pé de laranja lima</titulo>
+		<editora>Vozes</editora>
+		<autor>Brilhante</autor>
+	</livro>
+</livros>
