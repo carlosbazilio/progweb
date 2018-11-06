@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+		class ButtonSwitch extends React.Component {
+		  constructor(props) {
+		    super(props);
+		    this.state = { active: false };
+		  }
+
+		  handleClick() {
+	        this.setState(state => ({
+	            active: !this.state.active
+	        }));
+		  }
+
+		  render() {
+		    var buttonSwitch = this.state.active ? "On" : "Off";
+		    return (
+	            <div>
+	                <p>Click the button!</p>
+	                <input type="submit" onClick={this.handleClick} />
+	                <p>{buttonSwitch}</p>
+	            </div>
+		    );
+		  }
+		}
+
+		ReactDOM.render(
+		  <div><ButtonSwitch/></div>,
+		  document.getElementById('root')
+		);
+
+    </script>
+  </body>
+</html>
