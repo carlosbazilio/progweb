@@ -9,17 +9,18 @@
   </head>
   <body>
     <div id="root"></div>
+
     <script type="text/babel">
 
 		class ButtonSwitch extends React.Component {
 		  constructor(props) {
 		    super(props);
-		    this.state = { active: false };
+		    this.state = { active: false, contador : 0 };
 		  }
 
 		  handleClick() {
 	        this.setState(state => ({
-	            active: !this.state.active
+	            active: !this.state.active, contador : this.state.contador + 1
 	        }));
 		  }
 
@@ -28,8 +29,9 @@
 		    return (
 	            <div>
 	                <p>Click the button!</p>
-	                <input type="submit" onClick={this.handleClick} />
+	                <input type="submit" onClick={this.handleClick.bind(this)} />
 	                <p>{buttonSwitch}</p>
+	                <p>Cliques: {this.state.contador}</p>
 	            </div>
 		    );
 		  }
