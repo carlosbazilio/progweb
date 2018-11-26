@@ -13,6 +13,7 @@
     <title>AngularJS Basic</title>
   </head>
   <body ng-controller="BasicController"> <!-- (2) -->
+
     <div>
       What is your name?
       <input type="text" ng-model="greeter.name"> <!-- (3) -->
@@ -20,8 +21,27 @@
     <div>
       {{greeter.greeting()}} <!-- (4) -->
     </div>
+
+    <div>
+      What do you like?
+      <input type="text" ng-model="liker.thing" ng-keyup="liker.liking($event)"><button ng-click="liker.liking()">OK</button>
+		
+	  <input ng-keypress="count = count + 1" ng-init="count=0"> Key press count: {{count}}
+    </div>
+
+    <div>
+      {{liker.things}}
+      <!--ul><li *ngFor="let t of liker.things">{{t}}</li></ul-->
+	  <ul>
+	    <li ng-repeat="t in liker.things">
+	      {{ t }}
+	    </li>
+	  </ul>
+    </div>
+
   </body>
-  <script src="basicfiles/angular.js"></script> <!-- (5) -->
-  <script src="basicfiles/index.js"></script>
+  <!--script src="basicfiles/angular.js"></script> <-- (5) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+  <script src="index.js"></script>
 </html>
 
