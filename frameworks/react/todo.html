@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+  </head>
+  <body>
+  	<h2>React ToDo App</h2>
+
+    <div id="todos"></div>
+
+    <script type="text/babel">
+
+		class ToDo extends React.Component {
+		  constructor(props) {
+		    super(props);
+		    this.state = { currentTask : '', todos : [] };
+		    this.handleTyping = this.handleTyping.bind(this);
+		    this.handleNewTask = this.handleNewTask.bind(this);
+		    this.handleDeleteTask = this.handleDeleteTask.bind(this);
+		  }
+
+		  handleNewTask(event) {
+		    event.preventDefault()
+		    if (this.state.todos.indexOf(this.state.currentTask) == -1) {
+			    this.setState({
+		            currentTask: '',
+		            todos: [...this.state.todos, this.state.currentTask]
+		        });
+		    }
+		  }
+
+		  handleTyping(event) {
+	        this.setState({
+	            currentTask: event.target.value
+	        });
+		  }
+
+		  handleDeleteTask(event) {
+		  	if (event.target.nodeName == 'LI')
+			    this.setState({
+		            todos: this.state.todos.filter (x => x != event.target.innerText)
+		        });
+		  }
+
+		  render() {
+		    let retorno = [];
+		    for (let elem of this.state.todos) { 
+		    	retorno.push(<li key={this.state.todos.indexOf(elem)} onClick={this.handleDeleteTask}>{elem}</li>);
+		    }
+
+		    return (
+		    	<div>
+			    	<p>To Do's</p>
+
+				    <form onSubmit={this.handleNewTask}>
+				       <label>
+				          Task:
+				          <input type="text" value={this.state.currentTask} onChange={this.handleTyping} />
+				       </label>
+				       <input type="submit" value="Add" />
+				    </form>
+
+			        <ul>{retorno}</ul>
+		        </div>
+		    );
+		  }
+		}
+
+		ReactDOM.render(
+		  <div><ToDo/></div>,
+		  document.getElementById('todos')
+		);
+
+
+    </script>
+  </body>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</html>
