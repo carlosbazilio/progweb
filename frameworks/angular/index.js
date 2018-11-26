@@ -1,4 +1,5 @@
 /***
+ * Adapted by Carlos Bazilio (@carlosbazilio) from ...
  * Excerpted from "Seven Web Frameworks in Seven Weeks",
  * published by The Pragmatic Bookshelf.
  * Copyrights apply to this code. It may not be used to create training material, 
@@ -25,6 +26,12 @@ app.service("liker", function() { // (2)
   		this.things.push(this.thing);
       this.thing = "";
   	}
+    return this.things;
+  };
+  this.disliking = function(event) {
+    if (event != null) {
+      this.things = this.things.filter(x => x != event.currentTarget.innerText);
+    }
     return this.things;
   };
 });
