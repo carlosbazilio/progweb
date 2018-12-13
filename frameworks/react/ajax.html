@@ -1,0 +1,58 @@
+<!--
+  React example using Axios library for AJAX requests
+  Axio library: https://github.com/axios/axios
+  Author: Carlos Bazilio
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Ajax App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      class FetchDemo extends React.Component {
+        state = {
+          posts: []
+        }
+
+        componentDidMount() {
+          axios.get(`http://www.reddit.com/r/${this.props.subreddit}.json`)
+            .then(res => {
+              const posts = res.data.data.children.map(obj => obj.data);
+              this.setState({ posts });
+            });
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>{`/r/${this.props.subreddit}`}</h1>
+              <ul>
+                {this.state.posts.map(post =>
+                  <li key={post.id}><a href={post.url} target="_blank">{post.title}</a></li>
+                )}
+              </ul>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <FetchDemo subreddit="programming"/>,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+</html>
+
+
