@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React ToDo App</title>
+    <link rel="stylesheet" href="https://unpkg.com/react-day-picker/lib/style.css">
+  </head>
+  <body>
+  	<h2>React ToDo App</h2>
+
+    <div id="todos"></div>
+
+    <script type="text/babel">
+
+    	const g_separador = '##';
+
+		class ToDo extends React.Component {
+		  constructor(props) {
+		    super(props);
+		    let tasks = JSON.parse(localStorage.getItem('tasks'));
+		    if (!tasks)
+		    	tasks = [];
+		    this.state = { currentTask : '', todos : tasks, dueDate : undefined };
+		    this.handleTyping = this.handleTyping.bind(this);
+		    this.handleNewTask = this.handleNewTask.bind(this);
+		    this.handleDeleteTask = this.handleDeleteTask.bind(this);
+		    this.handleDayChange = this.handleDayChange.bind(this);
+		  }
+
+		  handleNewTask(event) {
+		    event.preventDefault();
+		    if (this.state.currentTask.length > 0 && (this.state.todos.map((t) => t.titulo).indexOf(this.state.currentTask) == -1)) {
+		    	let listanova = [...this.state.todos, {titulo : this.state.currentTask, data : this.state.dueDate}]
+			    this.setState({
+		            currentTask: '',
+		            todos: listanova,
+		            dueDate: undefined
+		        });
+		        localStorage.setItem('tasks', JSON.stringify(listanova));
+		    }
+		  }
+
+		  handleTyping(event) {
+	        this.setState({
+	            currentTask: event.target.value
+	        });
+		  }
+
+		  handleDeleteTask(event) {
+		  	if (event.target.nodeName == 'LI') {
+		  		let textoClicado = event.target.innerText;
+		  		let posBarra = textoClicado.indexOf(g_separador);
+		  		if (posBarra != -1)
+		  			textoClicado = textoClicado.slice(0, posBarra-1); // -1  para descartar espaco e barra depois do titulo
+		  		let listanova = this.state.todos.filter(x => x.titulo != textoClicado)
+			    this.setState({
+		            todos: listanova
+		        });
+		        localStorage.setItem('tasks', JSON.stringify(listanova));
+		    }
+		  }
+
+		  handleDayChange(day) {
+	        this.setState({
+	            dueDate: day
+	        });
+		  }
+
+		  render() {
+		    let retorno = [];
+		    let indice = 0;
+		    let ordenados = this.state.todos.sort((e1, e2) => new Date(e1.data) > new Date(e2.data));
+		    for (let elem of ordenados) {
+		    	let conteudo = elem.titulo + (elem.data == undefined ? "" : " " + g_separador + " " + new Date(elem.data).toLocaleDateString('pt-BR'));
+		    	retorno.push(<li key={indice} onClick={this.handleDeleteTask}>{conteudo}</li>);
+		    	indice = indice + 1;
+		    }
+
+		    return (
+		    	<div>
+				    <form onSubmit={this.handleNewTask}>
+				       <label>
+				          Task:
+				          <input type="text" value={this.state.currentTask} onChange={this.handleTyping} />
+				       </label>
+				       <DayPicker.Input value={this.state.dueDate} onDayChange={this.handleDayChange} />
+				       <input type="submit" value="Add" />
+				    </form>
+
+			        <ul>{retorno}</ul>
+
+			    	<p>(*) Click over an item to remove it</p>
+		        </div>
+		    );
+		  }
+		}
+
+		ReactDOM.render(
+		  <div><ToDo/></div>,
+		  document.getElementById('todos')
+		);
+
+    </script>
+
+  </body>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- Usando DayPicker sem instalacao -->
+	<script src="https://unpkg.com/react-day-picker/lib/daypicker.min.js"></script>
+</html>
