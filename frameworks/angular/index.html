@@ -11,7 +11,7 @@
 <html lang="en" ng-app="BasicApp"> <!-- (1) -->
   <head>
     <meta charset="utf-8">
-    <title>AngularJS Basic</title>
+    <title>Basic AngularJS Todo</title>
   </head>
   <body ng-controller="BasicController"> <!-- (2) -->
       
@@ -26,7 +26,7 @@
     </div>
 
     <div>
-      What do you like?
+      What do you have to do?
       <input type="text" ng-model="liker.thing" ng-keyup="liker.liking($event)"><button ng-click="liker.liking()">OK</button>
 		
 	  <!--input ng-keypress="count = count + 1" ng-init="count=0"> Key press count: {{count}}-->

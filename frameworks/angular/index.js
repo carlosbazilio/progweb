@@ -18,7 +18,8 @@ app.service("greeter", function() { // (2)
 
 app.service("liker", function() { // (2)
   this.thing = "";
-  this.things = [];
+  //this.things = [];
+  this.things = JSON.parse(localStorage.getItem('todos'));
   this.liking = function(event = null) {
   	if (((event == null) || (event.keyCode == 13)) &&
   		(this.thing.length > 0) && 
@@ -26,12 +27,14 @@ app.service("liker", function() { // (2)
   		this.things.push(this.thing);
       this.thing = "";
   	}
+    localStorage.setItem('todos', JSON.stringify(this.things));
     return this.things;
   };
   this.disliking = function(event) {
     if (event != null) {
       this.things = this.things.filter(x => x != event.currentTarget.innerText);
     }
+    localStorage.setItem('todos', JSON.stringify(this.things));
     return this.things;
   };
 });
