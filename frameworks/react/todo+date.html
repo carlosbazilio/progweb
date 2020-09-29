@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <title>React ToDo App</title>
-    <link rel="stylesheet" href="https://unpkg.com/react-day-picker/lib/style.css">
-  </head>
+		<link rel="stylesheet" href="https://unpkg.com/react-day-picker/lib/style.css">
+	</head>
+	
   <body>
   	<h2>React ToDo App</h2>
 
@@ -30,7 +31,7 @@
 		  handleNewTask(event) {
 		    event.preventDefault();
 		    if (this.state.currentTask.length > 0 && (this.state.todos.map((t) => t.titulo).indexOf(this.state.currentTask) == -1)) {
-		    	let listanova = [...this.state.todos, {titulo : this.state.currentTask, data : this.state.dueDate}]
+		    	let listanova = [...this.state.todos, {titulo : this.state.currentTask.trim(), data : this.state.dueDate}]
 			    this.setState({
 		            currentTask: '',
 		            todos: listanova,
@@ -55,10 +56,15 @@
 		  		let listanova = this.state.todos.filter(x => x.titulo != textoClicado)
 			    this.setState({
 		            todos: listanova
-		        });
-		        localStorage.setItem('tasks', JSON.stringify(listanova));
-		    }
-		  }
+		      });
+		      localStorage.setItem('tasks', JSON.stringify(listanova));
+				}
+				//this.handleDeleteTask2(event);
+			}
+			
+			handleDeleteTask2(event) {
+				event.target.parentElement.style.display = 'none';
+			}
 
 		  handleDayChange(day) {
 	        this.setState({
@@ -67,12 +73,15 @@
 		  }
 
 		  render() {
+		    let localizacao = 'pt-br';
 		    let retorno = [];
 		    let indice = 0;
 		    let ordenados = this.state.todos.sort((e1, e2) => new Date(e1.data) > new Date(e2.data));
+			  let festilo = (d) => {if (new Date() > new Date(d)) return {color:'red'}; else return {color:'black'};};
 		    for (let elem of ordenados) {
-		    	let conteudo = elem.titulo + (elem.data == undefined ? "" : " " + g_separador + " " + new Date(elem.data).toLocaleDateString('pt-BR'));
-		    	retorno.push(<li key={indice} onClick={this.handleDeleteTask}>{conteudo}</li>);
+		    	let conteudo = elem.titulo + (elem.data == undefined ? "" : " " + g_separador + " " + new Date(elem.data).toLocaleDateString(localizacao));
+					//retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}<span class="close">&times;</span></li>);
+					retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}</li>);
 		    	indice = indice + 1;
 		    }
 
@@ -83,7 +92,7 @@
 				          Task:
 				          <input type="text" value={this.state.currentTask} onChange={this.handleTyping} />
 				       </label>
-				       <DayPicker.Input value={this.state.dueDate} onDayChange={this.handleDayChange} />
+				       <DayPicker.Input onDayChange={this.handleDayChange} placeholder={moment().format("Do/MM/YYYY")} locale="pt-br" />
 				       <input type="submit" value="Add" />
 				    </form>
 
@@ -96,16 +105,20 @@
 		}
 
 		ReactDOM.render(
-		  <div><ToDo/></div>,
+			<div><ToDo/></div>,
 		  document.getElementById('todos')
-		);
 
     </script>
 
   </body>
+
+
 	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <!-- Usando DayPicker sem instalacao -->
 	<script src="https://unpkg.com/react-day-picker/lib/daypicker.min.js"></script>
+	<!-- Localização -->
+	<script src="https://unpkg.com/moment@2.24.0/min/moment-with-locales.min.js"></script>
+	
 </html>
