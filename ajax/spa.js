@@ -1,8 +1,10 @@
+
 var formulario = document.getElementById('form_login')
+
 formulario.onsubmit = function(e) {
 	e.preventDefault()
 
-	sendToServer(this, 'form_login')
+	sendToServer(this, 'logado')
 }
 
 var sendToServer = function(formulario, campo) {

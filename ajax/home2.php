@@ -3,8 +3,8 @@
 <?php
 	$nome = $_POST["usuario"];
 	if (isset($nome))
-		echo "Alô " . $nome . " Assincrono!";
+		echo $nome . " logado!";
 	else
-		echo "Alô Mundo Assincrono !!!";
+		echo "Usuario inexistente !!!";
 ?>
 

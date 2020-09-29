@@ -4,7 +4,7 @@
 
 <?php
 	$nome = $_POST["usuario"];
-	if (!is_null($nome))
+	if (isset($nome))
 		echo "Alô " . $nome;
 	else
 		echo "Alô Mundo !!!";
