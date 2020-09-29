@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- https://stackoverflow.com/a/24070373/4142878 -->
+        <script src="spa.js" async></script>
     </head>
     <body>
-        <form action="home.php" method="POST">
+        <form id="form_login" action="home.php" method="POST">
             <label for="usuario">Usuário:</label>
             <input name="usuario" type="text"/><br/>
             <label for="senha">Senha:</label>
