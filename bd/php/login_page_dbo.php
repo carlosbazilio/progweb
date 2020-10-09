@@ -1,23 +1,15 @@
 <?php
     $user = $_POST['user'];
     $password = $_POST['password'];
-    //if (($user != 'bazilio') or ($password != '123')) {
-    	//header('Location: fail.php'); 
-    	//include 'fail.php';
-        //echo '<br/>Login sem sucesso!';
-    	//exit; 
-    //}
 
-	$servername = "localhost";
-	/*$serverusername = "postgres";
-	$serverpassword = "adminpostgres";*/
+	$servername = "127.0.0.1";
 	$database = "progweb";
-	$serverusername = "aluno";
+	$serverusername = "usuariomysql";
 	$serverpassword = "#Senha123#";
 
 	try {
 	    //$conn = new PDO("pgsql:host=$servername;dbname=postgres;user=$serverusername;password=$serverpassword");
-	    $conn = new PDO("mysql:host=$servername;dbname=$database", $serverusername, $serverpassword);
+	    $conn = new PDO("mysql:host=$servername;dbname=$database;port=3306", $serverusername, $serverpassword);
 
 	    echo "Connected successfully <br/>";
 
