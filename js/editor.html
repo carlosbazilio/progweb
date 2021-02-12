@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editor JS</title>
+  <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.2.6/quill.min.js"></script>
+</head>
+<body>
+	<!-- Create the editor container -->
+	<div id="editor">
+	  <p>Hello World!</p>
+	  <p>Some initial <strong>bold</strong> text</p>
+	  <p><br></p>
+	</div>
+
+	<div>
+		 <button onclick="exibeConteudo()">Conteúdo</button> 
+	</div>
+
+    <script type="text/javascript">
+		var quill = new Quill('#editor', {
+		  /*modules: {
+		    toolbar: '#toolbar'
+		  },*/
+		  theme: 'snow'
+		});
+
+		function exibeConteudo() {
+			alert(document.getElementById('editor').innerHTML);
+		}
+    </script>
+
+</body>
+</html>

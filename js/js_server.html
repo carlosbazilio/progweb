@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tarefas</title>
+	<script type="text/javascript">
+		function adicionarNova() {
+			var novoElemento = document.createElement("li");
+			var info = document.getElementById("entrada").value;
+			var novoNo = document.createTextNode(info);
+			novoElemento.appendChild(novoNo);
+			document.getElementById("minhaLista").appendChild(novoElemento);
+			document.getElementById("entrada").value = "";
+		}
+		function chamarServidor() {
+			fetch("https://api.github.com/users/carlosbazilio").then(response => {
+				console.log(response.status);
+				// → 200
+				console.log(response.headers.get("Content-Type"));
+				// → text/plain
+				console.log(response);
+			});
+		}
+	</script>
+</head>
+<body>
+	<div id="principal">
+		<h1>Tarefas</h1>
+		<input type="text" id="entrada" placeholder="Atividade ..."></input>
+		<button id="b_salvar" onclick="adicionarNova()">Salvar</button>
+		<button id="b_server" onclick="chamarServidor()">Server</button>
+	</div>
+	<div id="tarefas">
+		<ul id="minhaLista"></ul>
+	</div>
+</body>
+</html>
+
