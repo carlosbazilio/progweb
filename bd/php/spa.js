@@ -4,10 +4,10 @@ var formulario = document.getElementById('form_login')
 formulario.onsubmit = function(e) {
 	e.preventDefault()
 
-	sendToServer(this, 'tela_principal')
+	sendToServerFetch(this, 'tela_principal')
 }
 
-var sendToServer = function(formulario, campo) {
+var sendToServeHTTPRequest = function(formulario, campo) {
 	var xmlhttp;
     // http://www.w3schools.com/xml/ajax_xmlhttprequest_create.asp
 
@@ -37,3 +37,19 @@ var sendToServer = function(formulario, campo) {
 	//xmlhttp.send(JSON.stringify(note))
 	xmlhttp.send(formdata)
 }
+
+var sendToServerFetch = function(formulario, campo) {
+
+    fetch('login_page_dbo.php', {method:'post', body: new FormData(formulario)})
+        .then(response => {
+             return response.text();
+        })
+        .then(result => {
+            document.getElementById(campo).innerHTML=result;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+        
+}
+

@@ -1,15 +1,16 @@
 <?php
-    $user = $_POST['user'];
-    $password = $_POST['password'];
+    $user = $_POST['usuario'];
+    $password = $_POST['senha'];
 
 	$servername = "127.0.0.1";
-	$database = "progweb";
-	$serverusername = "usuariomysql";
-	$serverpassword = "#Senha123#";
+	$database = "postgres";
+	$serverusername = "postgres";
+	$serverpassword = "adminpostgres";
 
 	try {
-	    //$conn = new PDO("pgsql:host=$servername;dbname=postgres;user=$serverusername;password=$serverpassword");
-	    $conn = new PDO("mysql:host=$servername;dbname=$database;port=3306", $serverusername, $serverpassword);
+		// String de conexão
+	    $conn = new PDO("pgsql:host=$servername;dbname=postgres;user=$serverusername;password=$serverpassword");
+	    //$conn = new PDO("mysql:host=$servername;dbname=$database;port=3306", $serverusername, $serverpassword);
 
 	    echo "Connected successfully <br/>";
 
@@ -21,7 +22,7 @@
 	    // http://php.net/manual/pt_BR/pdostatement.fetchall.php
 	    $results = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-	    if ($results[0]['senha'] == $password) {
+	    if ((count($results) > 0) && ($results[0]['senha'] == $password)) {
 	    	echo "Login successful!<br/>";
 	    	 
 	    	$sth = $conn->prepare("SELECT * FROM empresa");
