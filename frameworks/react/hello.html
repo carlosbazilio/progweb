@@ -3,30 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hello World</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!--script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script-->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-day-picker/7.4.10/react-day-picker.min.js" integrity="sha512-m/8RVa8Y8Ivdq8GLnYPpyqWotXxGOjPEOsKhBIiO2tGOKnC56FJawLPDc+tFfbj5hWreBXCg3QFcfRD2K5qv+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-day-picker/7.4.10/style.min.css" integrity="sha512-M+dMN7vnPFYzqfeCf2qV5OcKe1iuRYh3M8+/T0xjRfQNZ9xz2bJdq1cOwiy4AVYo9fMJ3B+Wt55fsnObabM8qQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
 
-		class HelloMessage extends React.Component {
+		class HelloMessage extends React.Component { // JSX
 		  render() {
 		    return (
 		      <div>
-		        Hello {this.props.name} !!
+		        Hello {this.props.name} from {this.props.address} !!
 		      </div>
 		    );
 		  }
 		}
 
+		function HelloMessage2(props) {
+	    return (
+	      <div>
+	        Hello {props.name} !!
+	      </div>
+	    );
+		}
+
 		ReactDOM.render(
-		  <div><HelloMessage name="Bazilio"/></div>,
+		  <div>
+		  	<div><HelloMessage name="Bazilio" address="Rio das Ostras"/></div>
+		  	<div><DayPicker /></div>
+		  	<div>
+		  		<DayPicker.Input
+			      todayButton="Go to Today"
+			      modifiers={{
+			        foo: new Date(),
+			      }}
+			      //onTodayButtonClick={(day, modifiers) => console.log(day, modifiers)}
+				   />
+				</div>
+		  </div>,
 		  document.getElementById('root')
 		);
 
     </script>
   </body>
+
 </html>

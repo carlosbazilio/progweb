@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+		/* 
+		Alô Mundo!
+
+		ReactDOM.render(
+			<h1>Hello, world!</h1>,
+			document.getElementById('root')
+		); 
+		*/
+
+		/*
+		React Elements and JSX
+
+		const element = (
+			<h1>
+				Hello World!
+			</h1>
+		);
+
+		// Renderizando um elemento
+		ReactDOM.render(
+			element,
+			document.getElementById('root')
+		);
+		*/
+
+		/*
+		React Elements and Functions
+
+		function formatName(user) {
+			return user.firstName + ' ' + user.lastName;
+		}
+
+		function getGreeting(user) {
+			if (user) {
+				return <h1>Hello, {formatName(user)}!</h1>;
+			}
+			return <h1>Hello, Stranger.</h1>;
+		}
+
+		const user = {
+			firstName: 'Carlos',
+			lastName: 'Bazilio'
+		};
+
+		const element = getGreeting(user)
+
+		ReactDOM.render(
+			element,
+			document.getElementById('root')
+		); 
+		*/
+
+		/* 
+		Elementos como funções puras
+		Recriação do React element (chamada do setInterval) é uma alternativa
+		para "alterar" conteúdo já exibido
+
+		function tick() {
+			const element = (
+				<div>
+					<h1>Hello, world!</h1>
+					<h2>It is {new Date().toLocaleTimeString()}.</h2>
+				</div>
+			);
+			ReactDOM.render(
+				element,
+				document.getElementById('root')
+			);
+		}
+
+		setInterval(tick, 1000);
+		*/
+
+
+		// Componentes Funcionais
+
+		function Welcome(props) {
+			return <h1>Hello, {props.name} !!</h1>;
+		}
+
+		function App () {
+			return (
+				<div>
+					<Welcome name="Carlos"/>
+					<Welcome name="Bazilio"/>
+				</div>
+			)
+		}
+
+		const element = <Welcome name="Bazilio" />;
+
+		ReactDOM.render(
+			<App />,
+			document.getElementById('root')
+		);
+
+    </script>
+  </body>
+</html>

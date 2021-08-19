@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Editor</title>
+		<link rel="stylesheet" href="https://cdn.quilljs.com/1.2.6/quill.snow.css">
+	</head>
+	
+  <body>
+  	<h2>React Editor</h2>
+
+    <div id="editor"></div>
+
+    <script type="text/babel">
+		
+		import ReactQuill from 'react-quill';
+
+    	class MyComponent extends React.Component {
+		  constructor(props) {
+		    super(props)
+		    this.state = { text: '' } // You can also pass a Quill Delta here
+		    this.handleChange = this.handleChange.bind(this)
+		  }
+		 
+		  handleChange(value) {
+		    this.setState({ text: value })
+		  }
+		 
+		  render() {
+		    return (
+		      <ReactQuill value={this.state.text}
+		                  onChange={this.handleChange} />
+		    )
+		  }
+		}
+
+		ReactDOM.render(
+			<div><ToDo/></div>,
+		 	document.getElementById('editor')
+		)
+
+    </script>
+
+  </body>
+
+	<script src="https://unpkg.com/react-quill@1.2.6/lib/index.js"></script>
+	
+</html>

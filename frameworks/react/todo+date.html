@@ -15,109 +15,109 @@
 
     	const g_separador = '##';
 
-		class ToDo extends React.Component {
-		  constructor(props) {
-		    super(props);
-		    let tasks = JSON.parse(localStorage.getItem('tasks'));
-		    if (!tasks)
-		    	tasks = [];
-		    this.state = { currentTask : '', todos : tasks, dueDate : undefined };
-		    this.handleTyping = this.handleTyping.bind(this);
-		    this.handleNewTask = this.handleNewTask.bind(this);
-		    this.handleDeleteTask = this.handleDeleteTask.bind(this);
-		    this.handleDayChange = this.handleDayChange.bind(this);
-		  }
+			class ToDo extends React.Component {
+			  constructor(props) {
+			    super(props);
+			    let tasks = JSON.parse(localStorage.getItem('tasks'));
+			    if (!tasks)
+			    	tasks = [];
+			    this.state = { currentTask : '', todos : tasks, dueDate : undefined };
+			    this.handleTyping = this.handleTyping.bind(this);
+			    this.handleNewTask = this.handleNewTask.bind(this);
+			    this.handleDeleteTask = this.handleDeleteTask.bind(this);
+			    this.handleDayChange = this.handleDayChange.bind(this);
+			  }
 
-		  handleNewTask(event) {
-		    event.preventDefault();
-		    if (this.state.currentTask.length > 0 && (this.state.todos.map((t) => t.titulo).indexOf(this.state.currentTask) == -1)) {
-		    	let listanova = [...this.state.todos, {titulo : this.state.currentTask.trim(), data : this.state.dueDate}]
-			    this.setState({
-		            currentTask: '',
-		            todos: listanova,
-		            dueDate: undefined
+			  handleNewTask(event) {
+			    event.preventDefault();
+			    if (this.state.currentTask.length > 0 && (this.state.todos.map((t) => t.titulo).indexOf(this.state.currentTask) == -1)) {
+			    	let listanova = [...this.state.todos, {titulo : this.state.currentTask.trim(), data : this.state.dueDate}]
+				    this.setState({
+			            currentTask: '',
+			            todos: listanova,
+			            dueDate: undefined
+			        });
+			        localStorage.setItem('tasks', JSON.stringify(listanova));
+			    }
+			  }
+
+			  handleTyping(event) {
+		        this.setState({
+		            currentTask: event.target.value
 		        });
-		        localStorage.setItem('tasks', JSON.stringify(listanova));
-		    }
-		  }
+			  }
 
-		  handleTyping(event) {
-	        this.setState({
-	            currentTask: event.target.value
-	        });
-		  }
-
-		  handleDeleteTask(event) {
-		  	if (event.target.nodeName == 'LI') {
-		  		let textoClicado = event.target.innerText;
-		  		let posBarra = textoClicado.indexOf(g_separador);
-		  		if (posBarra != -1)
-		  			textoClicado = textoClicado.slice(0, posBarra-1); // -1  para descartar espaco e barra depois do titulo
-		  		let listanova = this.state.todos.filter(x => x.titulo != textoClicado)
-			    this.setState({
-		            todos: listanova
-		      });
-		      localStorage.setItem('tasks', JSON.stringify(listanova));
+			  handleDeleteTask(event) {
+			  	if (event.target.nodeName == 'LI') {
+			  		let textoClicado = event.target.innerText;
+			  		let posBarra = textoClicado.indexOf(g_separador);
+			  		if (posBarra != -1)
+			  			textoClicado = textoClicado.slice(0, posBarra-1); // -1  para descartar espaco e barra depois do titulo
+			  		let listanova = this.state.todos.filter(x => x.titulo != textoClicado)
+				    this.setState({
+			            todos: listanova
+			      });
+			      localStorage.setItem('tasks', JSON.stringify(listanova));
+					}
+					//this.handleDeleteTask2(event);
 				}
-				//this.handleDeleteTask2(event);
+				
+				handleDeleteTask2(event) {
+					event.target.parentElement.style.display = 'none';
+				}
+
+			  handleDayChange(day) {
+		        this.setState({
+		            dueDate: day
+		        });
+			  }
+
+			  render() {
+			    let localizacao = 'pt-br';
+			    let retorno = [];
+			    let indice = 0;
+			    let ordenados = this.state.todos.sort((e1, e2) => new Date(e1.data) > new Date(e2.data));
+				  let festilo = (d) => {if (new Date() > new Date(d)) return {color:'red'}; else return {color:'black'};};
+			    for (let elem of ordenados) {
+			    	let conteudo = elem.titulo + (elem.data == undefined ? "" : " " + g_separador + " " + new Date(elem.data).toLocaleDateString(localizacao));
+						//retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}<span class="close">&times;</span></li>);
+						retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}</li>);
+			    	indice = indice + 1;
+			    }
+
+			    return (
+			    	<div>
+					    <form onSubmit={this.handleNewTask}>
+					       <label>
+					          Task:
+					          <input type="text" value={this.state.currentTask} onChange={this.handleTyping} />
+					       </label>
+					       <DayPicker.Input onDayChange={this.handleDayChange} placeholder={moment().format("Do/MM/YYYY")} locale="pt-br" />
+					       <input type="submit" value="Add" />
+					    </form>
+
+				        <ul>{retorno}</ul>
+
+				    	<p>(*) Click over an item to remove it</p>
+			        </div>
+			    );
+			  }
 			}
-			
-			handleDeleteTask2(event) {
-				event.target.parentElement.style.display = 'none';
-			}
 
-		  handleDayChange(day) {
-	        this.setState({
-	            dueDate: day
-	        });
-		  }
-
-		  render() {
-		    let localizacao = 'pt-br';
-		    let retorno = [];
-		    let indice = 0;
-		    let ordenados = this.state.todos.sort((e1, e2) => new Date(e1.data) > new Date(e2.data));
-			  let festilo = (d) => {if (new Date() > new Date(d)) return {color:'red'}; else return {color:'black'};};
-		    for (let elem of ordenados) {
-		    	let conteudo = elem.titulo + (elem.data == undefined ? "" : " " + g_separador + " " + new Date(elem.data).toLocaleDateString(localizacao));
-					//retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}<span class="close">&times;</span></li>);
-					retorno.push(<li key={indice} onClick={this.handleDeleteTask} style={festilo(elem.data)}>{conteudo}</li>);
-		    	indice = indice + 1;
-		    }
-
-		    return (
-		    	<div>
-				    <form onSubmit={this.handleNewTask}>
-				       <label>
-				          Task:
-				          <input type="text" value={this.state.currentTask} onChange={this.handleTyping} />
-				       </label>
-				       <DayPicker.Input onDayChange={this.handleDayChange} placeholder={moment().format("Do/MM/YYYY")} locale="pt-br" />
-				       <input type="submit" value="Add" />
-				    </form>
-
-			        <ul>{retorno}</ul>
-
-			    	<p>(*) Click over an item to remove it</p>
-		        </div>
-		    );
-		  }
-		}
-
-		ReactDOM.render(
-			<div><ToDo/></div>,
-		  document.getElementById('todos')
+			ReactDOM.render(
+				<div><ToDo/></div>,
+			  document.getElementById('todos')
+			);
 
     </script>
 
   </body>
 
-
 	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <!-- Usando DayPicker sem instalacao -->
-	<script src="https://unpkg.com/react-day-picker/lib/daypicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-day-picker/7.4.10/react-day-picker.min.js" integrity="sha512-m/8RVa8Y8Ivdq8GLnYPpyqWotXxGOjPEOsKhBIiO2tGOKnC56FJawLPDc+tFfbj5hWreBXCg3QFcfRD2K5qv+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- Localização -->
 	<script src="https://unpkg.com/moment@2.24.0/min/moment-with-locales.min.js"></script>
 	
