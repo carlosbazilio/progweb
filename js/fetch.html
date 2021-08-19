@@ -4,7 +4,6 @@
   <title>Codigo Postal</title>
 </head>
 <body>
-
   <div>
     <form>
       <div>
@@ -48,7 +47,8 @@
 
           const url = `https://viacep.com.br/ws/${valorDoCep}/json/`;
 
-          fetch(url).then(response => {
+          fetch(url)
+          .then(response => {
               return response.json();
           })
           .then(data => {
@@ -73,6 +73,27 @@
           bairro.value = data.bairro;
           cidade.value = data.localidade;
           estado.value = data.uf;
+      }
+
+      const btnLimpar = document.querySelector("#btnLimpar");
+      btnLimpar.addEventListener("click", event => {
+          limparCampos();
+      });
+
+      function limparCampos() {
+          const cep = document.querySelector("#cep");
+          const rua = document.querySelector("#rua");
+          const complemento = document.querySelector("#complemento");
+          const bairro = document.querySelector("#bairro");
+          const cidade = document.querySelector("#cidade");
+          const estado = document.querySelector("#estado");
+
+          cep.value = "";
+          rua.value = "";
+          complemento.value = "";
+          bairro.value = "";
+          cidade.value = "";
+          estado.value = "";
       }
 
     </script>
