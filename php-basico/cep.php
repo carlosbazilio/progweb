@@ -18,7 +18,7 @@
         echo $output;
 	}
 
-	$valor = $_POST["valor"];
+	$valor = $_GET["valor"];
 	if (!is_null($valor))
 		echo consultaCEP($valor);
 	else

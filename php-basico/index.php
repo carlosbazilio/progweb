@@ -1,9 +1,20 @@
 <!-- PHP, ASP, JSP, Python, Lua, JS, ... -->
 
-<p>Dentro do index.php</p>
-<p>Fora do Scriptlet PHP</p>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Página Teste</title>
+</head>
+<body>
+	<p>Dentro do index.php</p>
+	<p>Fora do Scriptlet PHP</p>
 
-<?php
-	echo "Alô " . "Mundo !!!";
-?>
+	<?php
+		echo "Alô " . "Mundo !!!";
+	?>
+</body>
+</html>
+
+
 
