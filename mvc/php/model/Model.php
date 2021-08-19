@@ -18,4 +18,11 @@ class Model {
         return $dados;
     }
 
+    public function getContato() {
+        // recebendo dados do banco
+        $dados = array(
+            'conteudo' => 'Contato <br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat felis id vehicula facilisis. Morbi porta nunc quam, quis bibendum turpis pulvinar eget. Morbi vel malesuada elit. ',
+        );
+        return $dados;
+    }
 }

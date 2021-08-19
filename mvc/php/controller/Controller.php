@@ -19,6 +19,9 @@ class Controller {
             case $this->metodo === "home":
                 $this->home();
                 break;
+            case $this->metodo === "contato":
+                $this->contato();
+                break;
             case $this->metodo === "sobre":
                 $this->sobre();
                 break;
@@ -60,7 +63,21 @@ class Controller {
         // recebe os dados do model
         $dados = $model->getSobre();
         $conteudoHeader = array(
-            'titulo' => 'Home',
+            'titulo' => 'Sobre',
+        );
+        $view = new View();
+        // monta a página
+        $view->render('paginas/header', $conteudoHeader);
+        $view->render('paginas/sobre', $dados);
+        $view->render('paginas/footer');
+    }
+
+    public function contato(){
+        $model = new Model;
+        // recebe os dados do model
+        $dados = $model->getContato();
+        $conteudoHeader = array(
+            'titulo' => 'Contato',
         );
         $view = new View();
         // monta a página

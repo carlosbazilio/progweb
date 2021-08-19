@@ -6,4 +6,5 @@
     </head>
     <body>
         <a href="<?php echo base_url('home'); ?>">Home</a>
+        <a href="<?php echo base_url('contato'); ?>">Contato</a>
         <a href="<?php echo base_url('sobre'); ?>">Sobre</a>
